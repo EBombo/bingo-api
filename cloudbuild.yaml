@@ -1,19 +1,19 @@
 steps:
   # Build the container image
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/bingo-322514/bingo-dev-api", "."]
+    args: ["build", "-t", "gcr.io/bingo-322514/bingo-gold-api", "."]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/bingo-322514/bingo-dev-api"]
+    args: ["push", "gcr.io/bingo-322514/bingo-gold-api"]
   # Deploy container image to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
         "run",
         "deploy",
-        "bingo-dev-api",
+        "bingo-gold-api",
         "--image",
-        "gcr.io/bingo-322514/bingo-dev-api",
+        "gcr.io/bingo-322514/bingo-gold-api",
         "--region",
         "us-central1",
         "--platform",
@@ -21,6 +21,6 @@ steps:
         "--allow-unauthenticated",
       ]
 images:
-  - "gcr.io/bingo-322514/bingo-dev-api"
+  - "gcr.io/bingo-322514/bingo-gold-api"
 options:
   logging: CLOUD_LOGGING_ONLY
