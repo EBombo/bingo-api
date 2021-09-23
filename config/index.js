@@ -1,7 +1,7 @@
 const admin = require("firebase-admin");
 const configJson = require("./config");
 const url = require("url");
-const serviceAccountEventsDev = require("./ebombo-events-dev-firebase-adminsdk-brntw-ad09602471.json");
+const serviceAccountEventsDev = require("./bingo-dev-322514-firebase-adminsdk-hezyq-7310fa3331.json");
 
 const config =
     process.env.NODE_ENV === "production"
