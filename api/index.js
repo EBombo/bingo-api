@@ -50,9 +50,11 @@ router.post("/games/:gameId/users/:userId", postGame);
 
 router.put("/games/:gameId/users/:userId", putGame);
 
-//---------------------------------------------
+//---------------------message------------------------
 
 router.post("/messages", postMessage);
+
+//---------------------errors------------------------
 
 router.post("/error-boundary", postError);
 
