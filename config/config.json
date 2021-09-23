@@ -1,5 +1,5 @@
 {
-  "productionConfig": {
+  "production": {
     "serverEmail": {
       "service": "gmail",
       "host": "smtp.gmail.com",
@@ -14,7 +14,16 @@
     "mails": "",
     "maxAgeCache": "86400"
   },
-  "devConfig": {
+  "development": {
+    "firebase": {
+      "apiKey": "AIzaSyDOsWCQ680tRldHqnkDnGSuxiPKH4aFUo8",
+      "authDomain": "bingo-dev-322514.firebaseapp.com",
+      "projectId": "bingo-dev-322514",
+      "storageBucket": "bingo-dev-322514.appspot.com",
+      "messagingSenderId": "513515398141",
+      "appId": "1:513515398141:web:3777fcb7c543a72bea2f94",
+      "measurementId": "G-E79L7Y61V4"
+    },
     "serverEmail": {
       "service": "gmail",
       "host": "smtp.gmail.com",
