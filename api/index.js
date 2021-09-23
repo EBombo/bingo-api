@@ -15,6 +15,7 @@ const { getGames } = require("./games/get");
 const { postGame } = require("./games/post");
 const { putGame } = require("./games/put");
 const { postMessage } = require("./messages/post");
+const {version} = require("../config");
 
 const api = express();
 const router = express.Router();
@@ -25,7 +26,7 @@ router.use(bodyParser.json());
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.get("/", async (req, res) => res.send("Hello!"));
+router.get("/", async (req, res) => res.send(`Hello gold ${version}`));
 
 router.post("/users/:userId", validateRequest, postUser);
 
