@@ -19,13 +19,13 @@ exports.getGames = async (req, res, next) => {
     const gamesQuery = await gamesRef.get();
 
     let games = snapshotToArray(gamesQuery);
-    games=games.map(game=>{
-      return {
-        ...game,
-        createAt:game.createAt.toDate().toString(),
-        updateAt:game.updateAt.toDate().toString()
-      }
-    })
+
+    games=games.map(game=> ({
+      ...game,
+      createAt: game.createAt.toDate().toString(),
+      updateAt: game.updateAt.toDate().toString()
+    }))
+
     return res.send(games);
   } catch (error) {
     logger.error(error);
