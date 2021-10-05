@@ -16,7 +16,7 @@ exports.putGame = async (req, res, next) => {
       updateAt: new Date(),
     });
 
-    res.send({ success: true });
+    return res.send({ success: true });
   } catch (error) {
     logger.error(error);
     next(error);
