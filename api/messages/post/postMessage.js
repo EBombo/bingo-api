@@ -19,7 +19,7 @@ exports.postMessage = async (req, res, next) => {
       lobbyId,
     });
 
-    res.send({ success: true });
+    return res.send({ success: true });
   } catch (error) {
     logger.error(error);
     next(error);
