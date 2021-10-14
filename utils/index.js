@@ -1,4 +1,5 @@
 const { get } = require("lodash");
+const moment = require("moment");
 
 exports.querySnapshotToArray = (snapshot) => {
   const returnArray = [];
@@ -28,4 +29,13 @@ exports.searchName = (user) => {
     ...get(user, "lastName", "").toUpperCase().split(" "),
     email.toUpperCase(),
   ];
+};
+
+exports.getCurrentDatetime = () => moment.now();
+
+exports.currentDatetimeWithOffsetHours = (offsetHours) => {
+    let currentDate = getCurrentDatetime();
+    // currentDate.setHours(currentDate.getHours() + offsetHours);
+    currentDate.subtract(offsetHours, 'hours')
+    return currentDate;
 };
