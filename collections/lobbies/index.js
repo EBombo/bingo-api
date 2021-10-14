@@ -6,7 +6,7 @@ const fetchLobbiesNotClosedAndCreatedLastHoursRef = async (lastHours) => {
   const lobbiesQuery = await firestore
     .collection("lobbies")
     .where("isClosed", "==", false)
-    .where("createAt", ">=", lastHours)
+    .where("createAt", "<=", lastHours)
     .get();
 
   return querySnapshotToRefs(lobbiesQuery);
