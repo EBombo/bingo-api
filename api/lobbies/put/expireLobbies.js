@@ -1,9 +1,9 @@
 const {
   fetchLobbiesNotClosedAndCreatedLastHoursRef,
-  // updateLobbiesIsClosedField,
+  updateLobbiesIsClosedField,
 } = require("../../../collections/lobbies");
 const logger = require("../../../utils/logger");
-const { currentDatetimeWithOffsetHours } = require("../../utils");
+const { currentDatetimeWithOffsetHours } = require("../../../utils");
 
 const LAST_HOURS_TO_RETRIEVE = 5;
 
@@ -20,14 +20,14 @@ exports.expireLobbies = async (req, res, next) => {
       return res.send({ success: false });
     }
 
-    logger.log("number of lobbies retrieved", lobbiesRef.docs.length);
-    logger.log("all lobbies's timestamp:", lobbies.docs.map(d => d.data().createAt.toString()).join(', '));
+    const result = await updateLobbiesIsClosedField(lobbiesRef, { isClosed: true });
 
-    // const result = await updateLobbiesIsClosedField(lobbiesRef, {isClosed:true}})
-    // logger.log("result", result);
+    // TODO: Consider remove the logger.
+    logger.log("result", result);
+
     return res.send({ success: true });
   } catch (error) {
     logger.error(error);
     next(error);
   }
-}
+};
