@@ -3,18 +3,17 @@ const {
   // updateLobbiesIsClosedField,
 } = require("../../../collections/lobbies");
 const logger = require("../../../utils/logger");
-const moment = require("moment")
+const { currentDatetimeWithOffsetHours } = require("../../utils");
 
-//const LAST_HOURS_TO_RETRIEVE = -5;
 const LAST_HOURS_TO_RETRIEVE = 5;
 
 exports.expireLobbies = async (req, res, next) => {
   try {
     logger.log("expireLobbies ->", req.params, req.query, req.body);
 
-    //const lastHour=moment().subtract(LAST_HOURS_TO_RETRIEVE,"hours").toDate()
+    const lastHours = currentDatetimeWithOffsetHours(LAST_HOURS_TO_RETRIEVE);
 
-    const lobbiesRef = await fetchLobbiesNotClosedAndCreatedLastHoursRef(LAST_HOURS_TO_RETRIEVE);
+    const lobbiesRef = await fetchLobbiesNotClosedAndCreatedLastHoursRef(lastHours);
 
     if (!lobbiesRef?.length) {
       logger.log("lobbiesRef is empty:", lobbiesRef);

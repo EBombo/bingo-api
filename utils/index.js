@@ -11,6 +11,8 @@ exports.querySnapshotToArray = (snapshot) => {
   return returnArray;
 };
 
+exports.querySnapshotToRefs = (snapshot) => snapshot.docs.map(doc => doc.ref);
+
 exports.snapshotToArray = (snapshot) => {
   const returnArray = [];
   snapshot.forEach((childSnapshot) => {
@@ -31,11 +33,4 @@ exports.searchName = (user) => {
   ];
 };
 
-exports.getCurrentDatetime = () => moment.now();
-
-exports.currentDatetimeWithOffsetHours = (offsetHours) => {
-    let currentDate = getCurrentDatetime();
-    // currentDate.setHours(currentDate.getHours() + offsetHours);
-    currentDate.subtract(offsetHours, 'hours')
-    return currentDate;
-};
+exports.currentDatetimeWithOffsetHours = (offsetHours) => moment().subtract(offsetHours, "hours").toDate();
