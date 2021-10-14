@@ -26,11 +26,7 @@ const updateLobbiesIsClosedField = async (lobbiesRefs, props) => {
 
         const batch = firestore.batch();
 
-        lobbyChunk.forEach(lobby => {
-                const lobbyRef = firestore.doc(`lobbies/${lobby.id}`);
-                batch.update(lobbyRef, 'isClosed', props);
-            }
-        );
+        lobbyChunk.forEach(lobbyRef => batch.update(lobbyRef, 'isClosed', props));
 
         await batch.commit()
     });
