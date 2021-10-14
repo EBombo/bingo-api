@@ -12,6 +12,8 @@ const fetchLobbiesNotClosedAndCreatedLastHoursRef = async (hoursFromNow) => {
     return lobbiesQuery.docs.map(doc => doc.ref);
     // CASE 2
     // return snapshotToArray(lobbiesQuery);
+
+    //hacer un map de referencias => ponerlo en utils
 };
 
 const BATCH_MAX_LIMIT_TRANSACTION = 500;
