@@ -16,7 +16,7 @@ const { postGame } = require("./games/post");
 const { putGame } = require("./games/put");
 const { postMessage } = require("./messages/post");
 const { expireLobbies } = require("./lobbies/put");
-const {version} = require("../config");
+const { version } = require("../config");
 
 const api = express();
 const router = express.Router();
@@ -36,8 +36,8 @@ router.put("/users/:userId/edit", validateAdmin, putUpdateUser);
 router.delete("/users/:userId", validateRequest, deleteUser);
 
 router.get(
-  "/verify/:userId/verification-code/:verificationCode",
-  getVerifyCode
+    "/verify/:userId/verification-code/:verificationCode",
+    getVerifyCode
 );
 
 router.get("/verify/:userId/resend-code", getResendVerifyCode);
