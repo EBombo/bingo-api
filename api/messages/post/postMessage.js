@@ -1,5 +1,5 @@
 const logger = require("../../../utils/logger");
-const { firestore } = require("../../../config");
+const { firestore, adminFirestore } = require("../../../config");
 
 exports.postMessage = async (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ exports.postMessage = async (req, res, next) => {
     const messagesRef = firestore.collection("messages");
     const messageId = messagesRef.doc().id;
 
-    await messagesRef.doc(messageId).set({
+    const promiseMessage = messagesRef.doc(messageId).set({
       id: messageId,
       createAt: new Date(),
       updateAt: new Date(),
@@ -18,6 +18,12 @@ exports.postMessage = async (req, res, next) => {
       user,
       lobbyId,
     });
+
+    const promiseLobby = firestore
+      .doc(`lobbies/${lobbyId}`)
+      .update({ totalMessages: adminFirestore.FieldValue.increment(1) });
+
+    await Promise.all([promiseMessage, promiseLobby]);
 
     return res.send({ success: true });
   } catch (error) {
