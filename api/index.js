@@ -14,6 +14,7 @@ const { validateAdmin } = require("./validateAdmin");
 const { getGames } = require("./games/get");
 const { postGame } = require("./games/post");
 const { putGame } = require("./games/put");
+const { deleteGame } = require("./games/delete");
 const { postMessage } = require("./messages/post");
 const { expireLobbies } = require("./lobbies/put");
 const { version } = require("../config");
@@ -51,6 +52,8 @@ router.get("/games/users/:userId", getGames);
 router.post("/games/:gameId/users/:userId", postGame);
 
 router.put("/games/:gameId/users/:userId", putGame);
+
+router.delete("/games/:gameId/users/:userId", deleteGame);
 
 //----------------lobbies---------------
 
