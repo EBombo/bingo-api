@@ -1,16 +1,14 @@
 const logger = require("../../../utils/logger");
 const { firestore } = require("../../../config");
 
-exports.putGame = async (req, res, next) => {
+exports.deleteGame = async (req, res, next) => {
   try {
-    logger.log("putGame->", req.params, req.query, req.body);
+    logger.log("deleteGame->", req.params, req.query, req.body);
 
-    const { userId, gameId } = req.params;
-    const game = req.body;
+    const { gameId } = req.params;
 
     await firestore.doc(`games/${gameId}`).update({
-      ...game,
-      usersIds: [userId],
+      deleted: true,
       updateAt: new Date(),
     });
 
@@ -20,3 +18,4 @@ exports.putGame = async (req, res, next) => {
     next(error);
   }
 };
+
