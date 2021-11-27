@@ -28,5 +28,8 @@
   "devDependencies": {
     "prettier": "^2.4.1"
   },
+  "prettier": {
+    "printWidth": 120
+  },
   "private": true
 }
