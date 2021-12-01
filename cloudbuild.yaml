@@ -1,10 +1,17 @@
 steps:
+  # Pull image
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args: [ "-c" , "docker pull gcr.io/${PROJECT_ID}/bingo-red-api:latest || exit 0" ]
+
   # Build the container image
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/bingo-322514/bingo-red-api", "."]
+    args: ["build", "-t", "gcr.io/${PROJECT_ID}/bingo-red-api", "."]
+
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/bingo-322514/bingo-red-api"]
+    args: ["push", "gcr.io/${PROJECT_ID}/bingo-red-api"]
+
   # Deploy container image to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
     args:
@@ -13,14 +20,32 @@ steps:
         "deploy",
         "bingo-red-api",
         "--image",
-        "gcr.io/bingo-322514/bingo-red-api",
+        "gcr.io/${PROJECT_ID}/bingo-red-api",
         "--region",
         "us-central1",
         "--platform",
         "managed",
         "--allow-unauthenticated",
       ]
+
+  # Force the new revision to serve 100% of traffic.
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "gcloud"
+    args:
+      [
+          "run",
+          "services",
+          "update-traffic",
+          "bingo-red-api",
+          "--to-latest",
+          "--platform",
+          "managed",
+          "--region",
+          "us-central1",
+      ]
+
 images:
-  - "gcr.io/bingo-322514/bingo-red-api"
+  - "gcr.io/${PROJECT_ID}/bingo-red-api"
+
 options:
   logging: CLOUD_LOGGING_ONLY
